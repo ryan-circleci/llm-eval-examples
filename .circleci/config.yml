@@ -1,0 +1,21 @@
+version: 2.1
+
+orbs:
+  path-filtering: circleci/path-filtering@1.0.0
+
+# This allows you to use CircleCI's dynamic configuration feature
+setup: true
+
+# The main purpose of this setup config is to identify which folders contain code changes,
+# letting us choose which model to retrain and redeploy
+workflows:
+  run-path-filter:
+    jobs:
+      - path-filtering/filter:
+          # Compare files on main
+          base-revision: main
+          # 3-column space-separated table for mapping: `path-to-test parameter-toset value-for-parameter` for each row
+          mapping: |
+            braintrust/.* run-braintrust-evals true
+            langsmith/.* run-langsmith-evals true
+          config-path: ".circleci/run_evals_config.yml"
