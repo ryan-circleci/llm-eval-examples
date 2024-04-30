@@ -4,10 +4,10 @@ Collection of LLM eval examples using [evals orb](https://circleci.com/developer
 
 ## Prerequisites
 
-Before runnning any of the examples, you'll need:
+Before running any of the examples, you'll need:
 
 - A **CircleCI account** connected to your code. You can [sign up for free](https://circleci.com/signup/).
-- An **OpenAI account**. Sign up for an OpenAI account at [openai.com](https://openai.com) to access their platform and API. Once logged into your OpenAI account, genreate your API key. Make note of the `API Key` and `Organization ID`.
+- An **OpenAI account**. Sign up for an OpenAI account at [openai.com](https://openai.com) to access their platform and API. Once logged into your OpenAI account, generate your API key. Make note of the `API Key` and `Organization ID`.
 
 Depending on your choice of evaluation provider, you will also need one of the following:
 
@@ -26,7 +26,7 @@ This will create a context with environment variables with the credentials you'v
 
 ![LLMOps Integration Context](images/LLMOps-Integration-Context.png)
 
-## The CirlceCI LLM-evaluations Orb
+## The CircleCI LLM-evaluations Orb
 
 The LLM-evaluations Orb simplifies the definition and execution of evaluation jobs using popular third-party tools, and generates reports of evaluation results.
 
@@ -72,7 +72,7 @@ The Braintrust example imports from HuggingFace an evaluation dataset of news ar
 
 <img style="text-align:center" width="300" alt="CircleCI-llmops" src="https://github.com/CircleCI-Public/llm-eval-examples/assets/19594309/93595b21-abe2-4c74-8a15-1ed08e19dd0d">
 
-In the LangSmith examples, we instanciate the dataset ourselves. Ahead of triggering your evaluation via CircleCI, run:
+In the LangSmith examples, we instantiate the dataset ourselves. Ahead of triggering your evaluation via CircleCI, run:
 
 ```
 cd ./experiments/ai-langsmith
