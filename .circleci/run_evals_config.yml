@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  ai-evals: circleci/ai-evals@0.0.6
+  evals: circleci/evals@1.0
 
 # PIPELINE PARAMETERS
 parameters:
@@ -25,13 +25,13 @@ workflows:
     jobs:
       - run-braintrust-evals:
           context:
-            - ai-ai-evals-orb-examples # Replace this with your context name
+            - ai--llm-evals-orb-examples # Replace this with your context name
   langsmith-evals:
     when: << pipeline.parameters.run-langsmith-evals >>
     jobs:
       - run-langsmith-evals:
           context:
-            - ai-ai-evals-orb-examples # Replace this with your context name
+            - ai-llm-evals-orb-examples # Replace this with your context name
 
 # JOBS
 jobs:
@@ -44,7 +44,7 @@ jobs:
           command: |
             pip install braintrust
             pip install -r ./braintrust/requirements.txt
-      - ai-evals/eval:
+      - evals/eval:
           circle_pipeline_id: << pipeline.id >>
           eval_platform: braintrust
           cmd: braintrust eval braintrust/eval_tutorial.py
@@ -57,7 +57,7 @@ jobs:
           name: install dependencies
           command: |
             pip install -r ./langsmith/requirements.txt
-      - ai-evals/eval:
+      - evals/eval:
           circle_pipeline_id: << pipeline.id >>
           cmd: python3 langsmith/eval.py
           eval_platform: langsmith
