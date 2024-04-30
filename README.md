@@ -123,7 +123,7 @@ _Note: the [evals orb](https://circleci.com/developer/orbs/orb/circleci/evals) w
 To enable the orb to post a summary of the evaluation results as a PR comment:
 
 - Generate a [Github Personal Access Token](https://circleci.atlassian.net/wiki/spaces/PES/pages/7172948051/Display+Webhooks+Received) with `repo` scope.
-- Add this token as the environment variable `GITHUB_TOKEN` in CircleCI project settings. Alternatively, you can also include this secret in the context created when you setup the LLMOps integration.
+- Add this token as the environment variable `GITHUB_TOKEN` in CircleCI project settings. Alternatively, you can include this secret in the context that was created when you set up the LLMOps integration.
 
 The examples included in this repository use [dynamic configuration](https://circleci.com/docs/dynamic-config/) to selectively run only the evaluations defined in the folder that changed. So, for changes committed to the folder `braintrust`, only your Braintrust evaluations will be run; for changes committed to the folder `langsmith`, only your LangSmith evaluations will be run.
 
