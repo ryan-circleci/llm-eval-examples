@@ -38,8 +38,8 @@ Given the volatile nature of evaluations, evaluations orchestrated by the [evals
 
 Instead, a summary of the evaluation results can _optionally_ be presented:
 
-- as a comment on the corresponding GitHub pull request
 - as an artifact within the CircleCI User Interface
+- as a comment on the corresponding GitHub pull request (requires a [GitHub Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens))
 
 ### Orb Parameters
 
@@ -47,38 +47,40 @@ The [evals orb](https://circleci.com/developer/orbs/orb/circleci/evals) accepts 
 
 _Some of the parameters are optional based on the eval platform being used._
 
-##### Common parameters
+#### Common parameters
 
-- `circle_pipeline_id` - CircleCI Pipeline ID
+- **`circle_pipeline_id`**: CircleCI Pipeline ID
 
-- `cmd` - Command to run the evaluation
+- **`cmd`**: Command to run the evaluation
 
-- `eval_platform` - Evaluation platform (e.g. `braintrust`, `langsmith` etc. - default: `braintrust`)
+- **`eval_platform`**: Evaluation platform (e.g. `braintrust`, `langsmith` etc.; default: `braintrust`)
 
-- `evals_result_location` - Location to save evaluation results (default: `./results`)
+- **`evals_result_location`**: Location to save evaluation results (default: `./results`)
 
-##### Braintrust-specific parameters
+#### Braintrust-specific parameters
 
-- `braintrust_experiment_name` (optional) - Braintrust experiment name. We will generate a unique name based on an MD5 hash of "`<CIRCLE_PIPELINE_ID>_<CIRCLE_WORKFLOW_ID>`" if no `braintrust_experiment_name` is provided.
+- **`braintrust_experiment_name`** _(optional)_: Braintrust experiment name
+  - If no value is provided, an experiment name will be auto-generated based on an MD5 hash of `<CIRCLE_PIPELINE_ID>_<CIRCLE_WORKFLOW_ID>`.
 
-##### LangSmith-specific parameters
+#### LangSmith-specific parameters
 
-- `langsmith_endpoint` - (optional) LangSmith API endpoint (default: `https://api.smith.langchain.com`)
+- **`langsmith_endpoint`** _(optional)_: LangSmith API endpoint (default: `https://api.smith.langchain.com`)
 
-- `langsmith_experiment_name` (optional) - LangSmith experiment name. We will generate a unique name based on an MD5 hash of "`<CIRCLE_PIPELINE_ID>_<CIRCLE_WORKFLOW_ID>`" if no `langsmith_experiment_name` is provided.
+- **`langsmith_experiment_name`** _(optional)_: LangSmith experiment name
+  - If no value is provided, an experiment name will be auto-generated based on an MD5 hash of `<CIRCLE_PIPELINE_ID>_<CIRCLE_WORKFLOW_ID>`.
 
 ## Getting started
 
 Fork this repo to run evaluations on a LLM-based application using the [evals orb](https://circleci.com/developer/orbs/orb/circleci/evals).
 This repository includes evaluations that can be run on two evaluation platforms: [Braintrust](https://www.braintrustdata.com/) and [LangSmith](https://smith.langchain.com/). Each example folder contains instructions and sample code to run evaluations.
 
-### The Braintrust Example
+### Braintrust Example
 
 The Braintrust example imports from HuggingFace an evaluation dataset of news articles, and uses ChatGPT to help classify them into category. The dataset contains both the news article and the expected category for each of them. As an evaluation metric, we use the Levenshtein distance, which tells us how distant the answer provided by ChatGPT is from the expected answer. Each individual test case is scored, and a summary score for the whole dataset is also available.
 
 <img style="text-align:center" width="300" alt="CircleCI-llmops" src="https://github.com/CircleCI-Public/llm-eval-examples/assets/19594309/93595b21-abe2-4c74-8a15-1ed08e19dd0d">
 
-### The LangSmith Example
+### LangSmith Example
 
 In the LangSmith example, we instantiate the dataset ourselves. Ahead of triggering your evaluation via CircleCI, run the following commands:
 
@@ -96,7 +98,7 @@ In both cases, as evaluations are run through the [evals orb](https://circleci.c
 
 <img style="text-align:center" width="370" alt="Screenshot 2024-04-30 at 10 19 53" src="https://github.com/CircleCI-Public/llm-eval-examples/assets/19594309/9df64653-d1b7-41c5-8830-f8d8d497bdca">
 
-If a `GITHUB_TOKEN` has been set up, the orb will also post summarized eval results as a PR comment:
+If a [`GITHUB_TOKEN`](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) has been set up, the orb will also post summarized eval results as a PR comment:
 
 <img style="text-align:center" width="700" alt="Screenshot 2024-04-30 at 10 21 48" src="https://github.com/CircleCI-Public/llm-eval-examples/assets/19594309/73c628b0-de35-41f2-8f06-7e486691cea6">
 
@@ -122,8 +124,8 @@ _Note: the [evals orb](https://circleci.com/developer/orbs/orb/circleci/evals) w
 
 To enable the orb to post a summary of the evaluation results as a PR comment:
 
-- Generate a [Github Personal Access Token](https://circleci.atlassian.net/wiki/spaces/PES/pages/7172948051/Display+Webhooks+Received) with `repo` scope.
-- Add this token as the environment variable `GITHUB_TOKEN` in CircleCI project settings. Alternatively, you can include this secret in the context that was created when you set up the LLMOps integration.
+- Generate a [GitHub Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) with `repo` scope.
+- Add this token as the environment variable [`GITHUB_TOKEN`](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) in CircleCI project settings. Alternatively, you could include this secret in the context that was created when you set up the LLMOps integration.
 
 The examples included in this repository use [dynamic configuration](https://circleci.com/docs/dynamic-config/) to selectively run only the evaluations defined in the folder that changed. So, for changes committed to the folder `braintrust`, only your Braintrust evaluations will be run; for changes committed to the folder `langsmith`, only your LangSmith evaluations will be run.
 
