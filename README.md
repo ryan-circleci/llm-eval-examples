@@ -26,9 +26,9 @@ This repository includes evaluations that can be run on two evaluation platforms
 
 ### Here's the process...
 
-1. Enter your credentials into CircleCI, which get stored as environment variables on a new context.
-2. Update the CircleCI configuration file with your newly-created context.
-3. Select the evaluation platform where you want to run evaluations.
+1. [Enter your credentials into CircleCI, which get stored as environment variables on a new context.](#step-1-enter-credentials-into-circleci)
+2. [Update the CircleCI configuration file with your newly-created context.](#step-2-update-circleci-config-with-your-newly-created-context)
+3. [Select an evaluation platform where you want to run evaluations.](#step-3-select-an-evaluation-platform)
 
 ### Step 1. Enter credentials into CircleCI
 
@@ -44,7 +44,7 @@ This will create a context with environment variables for the credentials you've
 
 ![LLMOps Integration Context](images/LLMOps-Integration-Context.png)
 
-:bulb: You can also optionally [store a `GITHUB_TOKEN`](#to-enable-the-evals-orb-to-post-eval-job-summaries-on-github-pull-requests) as an environment variable on this context, if you'd like your pipelines to post summarized eval job results as comments on GitHub pull requests.
+:bulb: _You can also optionally [store a `GITHUB_TOKEN`](#to-enable-the-evals-orb-to-post-eval-job-summaries-on-github-pull-requests) as an environment variable on this context, if you'd like your pipelines to post summarized eval job results as comments on GitHub pull requests._
 
 ### Step 2. Update CircleCI config with your newly-created context
 
@@ -69,7 +69,7 @@ workflows:
             - ai-llm-evals-orb-examples # Replace this with your context name
 ```
 
-### Step 3. Select your evaluation platform
+### Step 3. Select an evaluation platform
 
 #### Braintrust
 
