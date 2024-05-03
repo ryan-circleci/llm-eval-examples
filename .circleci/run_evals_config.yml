@@ -25,13 +25,13 @@ workflows:
     jobs:
       - run-braintrust-evals:
           context:
-            - ai--llm-evals-orb-examples # Replace this with your context name
+            - ai-llm-eval-examples # Replace this with your context name
   langsmith-evals:
     when: << pipeline.parameters.run-langsmith-evals >>
     jobs:
       - run-langsmith-evals:
           context:
-            - ai-llm-evals-orb-examples # Replace this with your context name
+            - ai-llm-eval-examples # Replace this with your context name
 
 # JOBS
 jobs:
