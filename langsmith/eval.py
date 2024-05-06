@@ -9,7 +9,6 @@ from langchain.smith import RunEvalConfig
 import os
 import uuid
 
-# a new trivial change
 
 class ConstraintEvaluator(StringEvaluator):
     @property
